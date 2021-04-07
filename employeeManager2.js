@@ -143,37 +143,41 @@ addEmployee = () => {
     ])
 
     //missing some stuff in this query
-    .then((data) => {
-    if (data.managerId == 0) {
-    connection.query =   `INSERT INTO employee SET ?`,
-    {
-        first_name: `${data.firstName}`,
-        last_name: `${data.lastName}`,
-        role_id: `${data.roleId}`,
-    },
+    .then ((answer) => {
+    (answer.managerId == 0) 
+    let query =   `INSERT INTO employee SET ?`;
+    connection.query(query,
+        {
+            first_name: `${answer.firstName}`,
+            last_name: `${answer.lastName}`,
+            role_id: `${answer.role}`,
+        },
     (err, res) => {
     if (err) throw err;
     console.log(`${res.affectedRows} employee added!\n`);
     runSearch();
     }
     
-    } else {
-    connection.query =   `INSERT INTO employee SET ?`,
-        {
-            first_name: `${data.firstName}`,
-            last_name: `${data.lastName}`,
-            role_id: `${data.roleId}`,
-            manager_id: `${data.managerId}`,
-        },
-        (err, res) => {
-        if (err) throw err;
-        console.log("`${res.affectedRows} employee added!\n`");
-        runSearch();
-    }
-    };
-    }
-    );
-    };
+    // } else {
+    // connection.query =   `INSERT INTO employee SET ?`,
+    // [
+    //     {
+    //         first_name: `${data.firstName}`,
+    //         last_name: `${data.lastName}`,
+    //         role_id: `${data.roleId}`,
+    //         manager_id: `${data.managerId}`,
+    //     },
+    //     (err, res) => {
+    //     if (err) throw err;
+    //     console.log("`${res.affectedRows} employee added!\n`");
+    //     runSearch();
+        
+);
+    // ]
+     });
+
+     }
+     ;
 
 deleteEmployee = () => {
     console.log('deleting an employee...');
@@ -190,14 +194,22 @@ deleteEmployee = () => {
             message: "Enter employee's lasst name: ", 
             },
         ])
-    // let query = 
-    // `DELETE FROM employee_db.employee WHERE first_name=(data.firstName) and last_name=(data.lastName)`;
-    // connection.query(query, (err, res) => {
-    // if (err) throw err;
-    // console.table(res);
-    // runSearch();
-     };
-    ;
+    .then((data) => {
+    connection.query = 'DELETE from employee WHERE ?',
+        [
+        {
+            first_name: `${data.firstName}`,
+            last_name: `${data.lastName}`,
+        },
+        ],
+        (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} employee deleted!\n`);
+        runSearch();
+        } 
+    }
+);
+};
 updateRole = () => {
 console.log("updating new employee role...\n");
 
