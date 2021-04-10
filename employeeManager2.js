@@ -215,23 +215,7 @@ const updateRole = () => {
     })
 }
 
-// //query to update employee role requires join to role table.....
-// .then((answer) => {
-// let query =   `INSERT INTO employee SET ? WHERE ?`;
-// connection.query(query,
-// {
-//     first_name: `${data.firstName}`,
-//     last_name: `${data.lastName}`,
-//     role_id: `${data.roleId}`,
-//     },
-//   (err, res) => {
-//   if (err) throw err;
-//  console.log(`${res.affectedRows} employee role updated!\n`);
-//  runSearch();
 
- //} 
-//);
-// ;
  
 connection.connect((err) => {
     if (err) throw err;
